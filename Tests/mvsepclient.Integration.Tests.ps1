@@ -1,4 +1,3 @@
-﻿
 # verify the interactions and behavior of the module's components when they are integrated together.
 Describe "Integration tests: mvsepclient" {
   Context "Functionality Integration" {
