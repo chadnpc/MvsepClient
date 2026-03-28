@@ -7,12 +7,12 @@ Blazingly fast [MVSep](https://mvsep.com/en) API client PowerShell module
 ## Installation
 
 ```PowerShell
-Install-Module mvsepclient
+Install-Module mvsepclient -Scope CurrentUser
 ```
 
 ## Requirements
 
-- PowerShell 7.6+
+- PowerShell core
 - RequiredModules (installed automatically)
   - [argparser](https://www.powershellgallery.com/packages/argparser)
   - [cliHelper.logger](https://www.powershellgallery.com/packages/cliHelper.logger)
