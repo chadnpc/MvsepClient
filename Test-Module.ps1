@@ -1,4 +1,3 @@
-﻿
 #!/usr/bin/env pwsh
 # .SYNOPSIS
 #   mvsepclient testScript v0.1.0
