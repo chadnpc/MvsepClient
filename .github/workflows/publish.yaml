@@ -1,4 +1,4 @@
-﻿name: GitHub release and Publish
+name: GitHub release and Publish
 on: [workflow_dispatch]
 defaults:
   run:
