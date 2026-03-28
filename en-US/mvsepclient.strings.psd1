@@ -1,4 +1,4 @@
-﻿
+
 @{
   ModuleName    = 'mvsepclient'
   ModuleVersion = '0.1.0'
