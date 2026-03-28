@@ -110,12 +110,16 @@
       IconUri      = 'https://github.com/user-attachments/assets/1220c30e-a309-43c3-9a80-1948dae30e09'
 
       # ReleaseNotes of this module
-      ReleaseNotes = '# Release Notes
+      ReleaseNotes = @'
+# Release Notes
 
 - Version_0.1.0
-- Functions ...
-- Optimizations
-'
+- New CLI wrapper: Invoke-MvSepClient (alias: MvSepClient)
+- Added static methods: New(), NewWithLogger(), GetAlgorithmsStatic(), GetQueueInfoStatic(), GetNewsStatic()
+- Added CreateQualityEntry for Quality Checker feature
+- Improved error handling and logging
+- Supports --wait flag for automatic polling and download in CLI
+'@
 
       # Prerelease string of this module
       # Prerelease = ''
