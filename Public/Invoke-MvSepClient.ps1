@@ -80,8 +80,8 @@ function Invoke-MvSepClient {
     switch ($command) {
       { $_ -in @('get-types', 'algorithms') } {
         $algos = $client.GetAlgorithms()
-        foreach ($algo in $algos) {
-          Write-Host $algos[$algo]
+        foreach ($a in $algos) {
+          Write-Host "ID:$($a.render_id) - $($a.name)"
         }
       }
 
