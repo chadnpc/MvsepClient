@@ -1,8 +1,6 @@
 # [mvsepclient](https://www.powershellgallery.com/packages/mvsepclient)
 
-Blazingly fast MVSep API client PowerShell module
-
-[API Documentation](https://mvsep.com/user-api)
+Blazingly fast [MVSep](https://mvsep.com/en) API client PowerShell module
 
 [![Downloads](https://img.shields.io/powershellgallery/dt/mvsepclient.svg?style=flat&logo=powershell&color=blue)](https://www.powershellgallery.com/packages/mvsepclient)
 
@@ -18,6 +16,8 @@ Install-Module mvsepclient
 - RequiredModules (installed automatically)
   - [argparser](https://www.powershellgallery.com/packages/argparser)
   - [cliHelper.logger](https://www.powershellgallery.com/packages/cliHelper.logger)
+
+- API key. [Get yours here](https://mvsep.com/user-api)
 
 ## Quick Start
 
@@ -42,16 +42,16 @@ Import-Module mvsepclient
 ### Get Available Separation Types
 
 ```PowerShell
-& Invoke-MvSepClient get-types --token YOUR_API_KEY
+Invoke-MvSepClient get-types --token YOUR_API_KEY
 
-# Or using the alias
-& MvSepClient algorithms --token YOUR_API_KEY
+# Or use the alias :)
+MvSepClient algorithms --token YOUR_API_KEY
 ```
 
 ### Separate a Single File
 
 ```PowerShell
-& Invoke-MvSepClient separate --input song.mp3 --output ./output --token YOUR_API_KEY --sep_type 48
+MvSepClient separate --input song.mp3 --output ./output --token YOUR_API_KEY --sep_type 48
 ```
 
 ### Separate a File with Automatic Wait
@@ -59,57 +59,57 @@ Import-Module mvsepclient
 Wait for processing to complete and download automatically:
 
 ```PowerShell
-& Invoke-MvSepClient separate --input song.mp3 --output ./output --token YOUR_API_KEY --sep_type 48 --wait
+MvSepClient separate --input song.mp3 --output ./output --token YOUR_API_KEY --sep_type 48 --wait
 ```
 
 ### Separate a Directory
 
 ```PowerShell
-& Invoke-MvSepClient separate --input ./audio --output ./output --token YOUR_API_KEY --sep_type 48
+MvSepClient separate --input ./audio --output ./output --token YOUR_API_KEY --sep_type 48
 ```
 
 ### Download Result by Hash
 
 ```PowerShell
-& Invoke-MvSepClient get-result --hash YOUR_HASH --output ./output --token YOUR_API_KEY
+MvSepClient get-result --hash YOUR_HASH --output ./output --token YOUR_API_KEY
 ```
 
 ### Get Queue Information
 
 ```PowerShell
-& Invoke-MvSepClient queue --token YOUR_API_KEY
+MvSepClient queue --token YOUR_API_KEY
 ```
 
 ### Get News
 
 ```PowerShell
-& Invoke-MvSepClient news --token YOUR_API_KEY --lang en --limit 10
+MvSepClient news --token YOUR_API_KEY --lang en --limit 10
 ```
 
 ### Get Separation History
 
 ```PowerShell
-& Invoke-MvSepClient history --token YOUR_API_KEY --start 0 --limit 20
+MvSepClient history --token YOUR_API_KEY --start 0 --limit 20
 ```
 
 ### Premium Management
 
 ```PowerShell
 # Enable premium
-& Invoke-MvSepClient premium-enable --token YOUR_API_KEY
+MvSepClient premium-enable --token YOUR_API_KEY
 
 # Disable premium
-& Invoke-MvSepClient premium-disable --token YOUR_API_KEY
+MvSepClient premium-disable --token YOUR_API_KEY
 ```
 
 ### Long Filenames
 
 ```PowerShell
 # Enable long filenames
-& Invoke-MvSepClient long-filenames-enable --token YOUR_API_KEY
+MvSepClient long-filenames-enable --token YOUR_API_KEY
 
 # Disable long filenames
-& Invoke-MvSepClient long-filenames-disable --token YOUR_API_KEY
+MvSepClient long-filenames-disable --token YOUR_API_KEY
 ```
 
 ## Class Usage
@@ -266,7 +266,7 @@ $result = $client.CreateQualityEntry(
 
 For the complete list, run:
 ```PowerShell
-& Invoke-MvSepClient get-types --token YOUR_API_KEY
+MvSepClient get-types --token YOUR_API_KEY
 ```
 
 ## License
