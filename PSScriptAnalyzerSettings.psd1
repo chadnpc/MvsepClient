@@ -1,4 +1,3 @@
-﻿
 @{
   IncludeDefaultRules = $true
   ExcludeRules        = @(
