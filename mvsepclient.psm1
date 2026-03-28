@@ -17,11 +17,36 @@ class MvsepClient {
     $this.RetryInterval = $retryInterval
     $this.BaseUrl = "https://mvsep.com/api"
     if ($null -eq $logger) {
-      # clihelper.logger module provides New-Logger cmdlet
       $this.Logger = New-Logger -Level 1
     } else {
       $this.Logger = $logger
     }
+  }
+
+  static [MvsepClient] New([string]$apiKey, [int]$retries = 30, [int]$retryInterval = 20) {
+    return [MvsepClient]::new($apiKey, $retries, $retryInterval, $null)
+  }
+
+  static [MvsepClient] NewWithLogger([string]$apiKey, [Logger]$logger, [int]$retries = 30, [int]$retryInterval = 20) {
+    return [MvsepClient]::new($apiKey, $retries, $retryInterval, $logger)
+  }
+
+  static [PSCustomObject] GetAlgorithmsStatic([string]$baseUrl = "https://mvsep.com/api") {
+    $url = "$baseUrl/app/algorithms"
+    try {
+      return Invoke-RestMethod -Uri $url -Method Get
+    } catch {
+      throw "Failed to fetch algorithms: $($_.Exception.Message)"
+    }
+  }
+
+  static [PSCustomObject] GetQueueInfoStatic([string]$baseUrl = "https://mvsep.com/api") {
+    return Invoke-RestMethod -Uri "$baseUrl/app/queue" -Method Get
+  }
+
+  static [PSCustomObject] GetNewsStatic([string]$lang = "en", [int]$start = 0, [int]$limit = 10, [string]$baseUrl = "https://mvsep.com/api") {
+    $params = @{ lang = $lang; start = $start; limit = $limit }
+    return Invoke-RestMethod -Uri "$baseUrl/app/news" -Method Get -Body $params
   }
 
   [PSCustomObject] GetAlgorithms() {
@@ -72,11 +97,14 @@ class MvsepClient {
     }
 
     try {
-      $response = Invoke-RestMethod -Uri $url -Method Get -Body $params
-      return $response
-    } catch {
-      $this.Logger.LogErrorLine("Failed to get status for hash $hash: $($_.Exception.Message)")
-      throw $_
+        $response = Invoke-RestMethod -Uri $url -Method Get -Body $params
+        return $response
+    }
+    catch {
+        $errMsg = $_.Exception.Message
+        $msg = "Failed to get status for hash ${hash}: ${errMsg}"
+        $this.Logger.LogErrorLine($msg)
+        throw $_
     }
   }
 
@@ -175,6 +203,32 @@ class MvsepClient {
   [PSCustomObject] DisableLongFilenames() {
     $body = @{ api_token = $this.ApiKey }
     return Invoke-RestMethod -Uri "$($this.BaseUrl)/app/disable_long_filenames" -Method Post -Body $body
+  }
+
+  [PSCustomObject] CreateQualityEntry([string]$zipPath, [string]$algoName, [string]$mainText, [int]$datasetType = 0, [int]$ensemble = 0, [string]$password = "") {
+    $url = "$($this.BaseUrl)/quality_checker/add"
+    $form = @{
+      api_token = $this.ApiKey
+      algo_name = $algoName
+      main_text = $mainText
+      dataset_type = $datasetType
+      ensemble = $ensemble
+      password = $password
+    }
+
+    if (Test-Path $zipPath) {
+      $form["zipfile"] = Get-Item $zipPath
+    } else {
+      throw "Zip file not found: $zipPath"
+    }
+
+    try {
+      $response = Invoke-RestMethod -Uri $url -Method Post -Form $form
+      return $response
+    } catch {
+      $this.Logger.LogErrorLine("Failed to create quality entry: $($_.Exception.Message)")
+      throw $_
+    }
   }
 }
 #endregion Classes
