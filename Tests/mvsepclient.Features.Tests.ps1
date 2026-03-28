@@ -1,4 +1,3 @@
-﻿
 Describe "Feature tests: mvsepclient" {
   Context "Feature 1" {
     It "Does something expected" {
