@@ -1,7 +1,6 @@
-﻿
 # [mvsepclient](https://www.powershellgallery.com/packages/mvsepclient)
 
-🔥 Blazingly fast PowerShell thingy that stonks up your terminal game.
+🔥 Blazingly fast MvsepClient PowerShell module
 
 [API](https://mvsep.com/user-api)
 
@@ -17,7 +16,18 @@ then
 
 ```PowerShell
 Import-Module mvsepclient
-# do stuff here with the main class.
+
+$client = [MvsepClient]::new("YOUR_API_KEY")
+
+# Get available algorithms
+$algos = $client.GetAlgorithms()
+
+# Process a directory of files
+$options = @{
+    sep_type = 48 # MelBand Roformer
+    add_opt1 = 1
+}
+$client.ProcessDirectory("./input", "./output", $options)
 ```
 
 ## License
