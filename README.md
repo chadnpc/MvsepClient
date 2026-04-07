@@ -17,7 +17,7 @@ Install-Module mvsepclient -Scope CurrentUser
   - [argparser](https://www.powershellgallery.com/packages/argparser)
   - [cliHelper.logger](https://www.powershellgallery.com/packages/cliHelper.logger)
 
-- API key. [Get yours here](https://mvsep.com/user-api)
+- API key. [Login](https://mvsep.com/login/oauth/github) >> and [create yours](https://mvsep.com/user-api)
 
 ## Quick Start
 
